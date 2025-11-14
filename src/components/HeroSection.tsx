@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero-hedge-executives.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -18,14 +18,17 @@ const HeroSection = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Generate random leaves
-  const leaves = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    left: Math.random() * 100,
-    delay: Math.random() * 15,
-    duration: 15 + Math.random() * 10,
-    size: 20 + Math.random() * 30,
-  }));
+  // Generate random leaves - memoized to prevent regeneration on each render
+  const leaves = useMemo(() => 
+    Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 15,
+      duration: 15 + Math.random() * 10,
+      size: 20 + Math.random() * 30,
+      opacity: 0.4 + Math.random() * 0.4,
+    })), []
+  );
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -69,7 +72,7 @@ const HeroSection = () => {
               animation: `leaf-fall ${leaf.duration}s linear infinite`,
               animationDelay: `${leaf.delay}s`,
               fontSize: `${leaf.size}px`,
-              opacity: 0.4 + Math.random() * 0.4,
+              opacity: leaf.opacity,
             }}
           >
             <Leaf className="drop-shadow-lg" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
