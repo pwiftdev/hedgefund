@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Loader from "@/components/Loader";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import BenefitsSection from "@/components/BenefitsSection";
@@ -6,6 +8,12 @@ import TokenomicsSection from "@/components/TokenomicsSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const [showLoader, setShowLoader] = useState(true);
+
+  if (showLoader) {
+    return <Loader onComplete={() => setShowLoader(false)} />;
+  }
+
   return (
     <div className="min-h-screen">
       <HeroSection />
