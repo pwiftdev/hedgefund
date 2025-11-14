@@ -10,10 +10,10 @@ const Loader = ({ onComplete }: LoaderProps) => {
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showButton, setShowButton] = useState(false);
 
-  const phrases = ["THE HEDGE", "AGAINST", "THE MARKET"];
+  const phrases = ["THE HEDGE", "AGAINST", "THE MARKET", "$HEDGE"];
 
   useEffect(() => {
-    // Show each phrase for ~650ms
+    // Show each phrase for ~500ms
     const phaseTimer = setInterval(() => {
       setCurrentPhase((prev) => {
         if (prev < phrases.length - 1) {
@@ -22,7 +22,7 @@ const Loader = ({ onComplete }: LoaderProps) => {
         clearInterval(phaseTimer);
         return prev;
       });
-    }, 650);
+    }, 500);
 
     // Show button after 2 seconds
     const buttonTimer = setTimeout(() => {
@@ -90,7 +90,7 @@ const Loader = ({ onComplete }: LoaderProps) => {
                   ? "opacity-0 scale-95 blur-sm"
                   : "opacity-0 scale-105 blur-sm"
               } ${
-                index === 0 || index === 2
+                index === 0 || index === 2 || index === 3
                   ? "bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent"
                   : "text-foreground"
               }`}
