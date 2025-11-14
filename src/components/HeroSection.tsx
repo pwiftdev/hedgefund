@@ -63,15 +63,16 @@ const HeroSection = () => {
         {leaves.map((leaf) => (
           <div
             key={leaf.id}
-            className="absolute text-hedge-medium/30"
+            className="absolute text-hedge-bright"
             style={{
               left: `${leaf.left}%`,
               animation: `leaf-fall ${leaf.duration}s linear infinite`,
               animationDelay: `${leaf.delay}s`,
               fontSize: `${leaf.size}px`,
+              opacity: 0.4 + Math.random() * 0.4,
             }}
           >
-            <Leaf className="drop-shadow-lg" />
+            <Leaf className="drop-shadow-lg" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))' }} />
           </div>
         ))}
       </div>
