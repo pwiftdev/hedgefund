@@ -40,11 +40,11 @@ const Loader = ({ onComplete }: LoaderProps) => {
     };
   }, []);
 
-  // Generate random leaves
+  // Generate random leaves with negative delays to start immediately
   const leaves = Array.from({ length: 20 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    delay: (i / 20) * 5, // Étalement sur 5s pour voir immédiatement des feuilles
+    delay: -Math.random() * 8, // Negative delays so leaves are already falling
     duration: 8 + Math.random() * 7,
     size: 20 + Math.random() * 30,
     opacity: 0.4 + Math.random() * 0.4,

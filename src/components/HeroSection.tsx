@@ -23,7 +23,7 @@ const HeroSection = () => {
     Array.from({ length: 15 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
-      delay: (i / 15) * 8, // Étalement sur 8s au lieu de random
+      delay: -Math.random() * 10, // Negative delays so leaves start falling immediately
       duration: 15 + Math.random() * 10,
       size: 20 + Math.random() * 30,
       opacity: 0.4 + Math.random() * 0.4,
