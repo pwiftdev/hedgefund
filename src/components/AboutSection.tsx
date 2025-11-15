@@ -1,5 +1,5 @@
 import { Shield, Leaf, TrendingUp } from "lucide-react";
-import hedgeSphereNoBg from "@/assets/hedge-sphere-nobg.png";
+import hedgeSphere from "@/assets/hedge-sphere.png";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
@@ -78,14 +78,11 @@ const AboutSection = () => {
             <div className={`relative transition-all duration-1000 delay-400 ${
               contentVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
             }`}>
-              <div className="absolute inset-0 bg-gradient-to-br from-hedge-bright/20 to-hedge-medium/20 blur-3xl animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-br from-hedge-bright/30 to-hedge-medium/30 blur-3xl animate-pulse" />
               <img 
-                src={hedgeSphereNoBg} 
+                src={hedgeSphere} 
                 alt="Hedge Sphere" 
-                className="relative w-full max-w-md mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500 animate-float"
-                style={{
-                  filter: 'drop-shadow(0 20px 40px rgba(76, 175, 80, 0.3))',
-                }}
+                className="relative w-full max-w-md mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
