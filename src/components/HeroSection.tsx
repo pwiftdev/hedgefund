@@ -102,7 +102,7 @@ const HeroSection = () => {
               $HEDGE
             </h1>
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent leading-tight animate-gradient">
-              The Only Hedge Against
+              Your Only Hedge Against
               <br />
               the Market
             </h2>
