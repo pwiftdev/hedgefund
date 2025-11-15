@@ -6,6 +6,7 @@ import BenefitsSection from "@/components/BenefitsSection";
 import RoadmapSection from "@/components/RoadmapSection";
 import TokenomicsSection from "@/components/TokenomicsSection";
 import Footer from "@/components/Footer";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   const [showLoader, setShowLoader] = useState(true);
@@ -15,7 +16,8 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative">
+      <ThemeToggle />
       <HeroSection />
       <AboutSection />
       <BenefitsSection />

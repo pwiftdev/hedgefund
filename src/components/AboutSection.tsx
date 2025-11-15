@@ -1,12 +1,27 @@
 import { Shield, Leaf, TrendingUp } from "lucide-react";
 import hedgeSphere from "@/assets/hedge-sphere.png";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const AboutSection = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
+  const { ref: contentRef, isVisible: contentVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return (
-    <section className="py-24 bg-card">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-card relative overflow-hidden">
+      {/* Parallax background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-hedge-bright rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-hedge-medium rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 relative">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16 animate-fade-in">
+          <div 
+            ref={titleRef}
+            className={`text-center mb-16 transition-all duration-1000 ${
+              titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               What Is $HEDGE?
             </h2>
@@ -16,8 +31,13 @@ const AboutSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-slide-up">
+          <div 
+            ref={contentRef}
+            className="grid md:grid-cols-2 gap-12 items-center"
+          >
+            <div className={`space-y-6 transition-all duration-1000 delay-200 ${
+              contentVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}>
               <div className="flex items-start gap-4 p-6 rounded-xl bg-background border border-border hover:shadow-lg transition-all duration-300">
                 <div className="w-12 h-12 rounded-lg bg-hedge-bright/20 flex items-center justify-center flex-shrink-0">
                   <Shield className="w-6 h-6 text-hedge-dark" />
@@ -55,12 +75,14 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="relative animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-hedge-bright/30 to-hedge-medium/30 blur-3xl" />
+            <div className={`relative transition-all duration-1000 delay-400 ${
+              contentVisible ? 'opacity-100 translate-x-0 scale-100' : 'opacity-0 translate-x-10 scale-95'
+            }`}>
+              <div className="absolute inset-0 bg-gradient-to-br from-hedge-bright/30 to-hedge-medium/30 blur-3xl animate-pulse" />
               <img 
                 src={hedgeSphere} 
                 alt="Hedge Sphere" 
-                className="relative w-full max-w-md mx-auto drop-shadow-2xl"
+                className="relative w-full max-w-md mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>

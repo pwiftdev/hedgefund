@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { PieChart, Lock, Droplet, Users } from "lucide-react";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const tokenomics = [
   {
@@ -29,9 +31,17 @@ const tokenomics = [
 ];
 
 const TokenomicsSection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
   return (
-    <section className="py-24 bg-gradient-to-b from-muted/20 to-background">
-      <div className="container mx-auto px-4">
+    <section className="py-24 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
+      {/* Animated background */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-hedge-bright rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-1/3 right-1/3 w-80 h-80 bg-hedge-medium rounded-full blur-3xl animate-float-delayed" />
+      </div>
+
+      <div className="container mx-auto px-4 relative">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
@@ -43,24 +53,51 @@ const TokenomicsSection = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div ref={ref} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {tokenomics.map((item, index) => {
               const Icon = item.icon;
+              const numericValue = item.value.replace(/[^0-9]/g, '');
+              const hasNumeric = numericValue.length > 0;
+              
               return (
                 <Card 
                   key={index}
-                  className="border-border bg-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1 animate-scale-in"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className={`border-border bg-card hover:shadow-xl transition-all duration-500 hover:-translate-y-2 hover:scale-105 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ 
+                    transitionDelay: `${index * 100}ms`,
+                  }}
                 >
                   <CardContent className="p-8 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-hedge-bright to-hedge-medium flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-hedge-bright to-hedge-medium flex items-center justify-center mx-auto mb-6 shadow-lg hover:shadow-hedge-bright/50 transition-shadow duration-300">
                       <Icon className="w-8 h-8 text-primary-foreground" />
                     </div>
                     <div className="mb-2 text-sm font-medium text-muted-foreground uppercase tracking-wider">
                       {item.label}
                     </div>
                     <div className="text-3xl font-bold text-foreground mb-2">
-                      {item.value}
+                      {hasNumeric && item.label === "Total Supply" ? (
+                        <AnimatedCounter 
+                          end={parseInt(numericValue)} 
+                          duration={2500}
+                          separator=","
+                          className="bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent"
+                        />
+                      ) : hasNumeric && item.value.includes('%') ? (
+                        <>
+                          <AnimatedCounter 
+                            end={parseInt(numericValue)} 
+                            duration={2000}
+                            suffix="%"
+                            className="bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent"
+                          />
+                        </>
+                      ) : (
+                        <span className="bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent">
+                          {item.value}
+                        </span>
+                      )}
                     </div>
                     <div className="text-sm text-muted-foreground">
                       {item.description}
