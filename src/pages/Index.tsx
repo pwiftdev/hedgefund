@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Loader from "@/components/Loader";
+import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import BenefitsSection from "@/components/BenefitsSection";
@@ -17,12 +18,21 @@ const Index = () => {
 
   return (
     <div className="min-h-screen relative">
+      <Navigation />
       <ThemeToggle />
       <HeroSection />
-      <AboutSection />
-      <BenefitsSection />
-      <RoadmapSection />
-      <TokenomicsSection />
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="benefits">
+        <BenefitsSection />
+      </div>
+      <div id="roadmap">
+        <RoadmapSection />
+      </div>
+      <div id="tokenomics">
+        <TokenomicsSection />
+      </div>
       <Footer />
     </div>
   );
