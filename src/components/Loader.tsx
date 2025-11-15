@@ -39,9 +39,10 @@ const Loader = ({ onComplete }: LoaderProps) => {
   const leaves = Array.from({ length: 20 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    delay: Math.random() * 2,
+    delay: (i / 20) * 5, // Étalement sur 5s pour voir immédiatement des feuilles
     duration: 8 + Math.random() * 7,
     size: 20 + Math.random() * 30,
+    opacity: 0.4 + Math.random() * 0.4,
   }));
 
   return (
@@ -68,7 +69,7 @@ const Loader = ({ onComplete }: LoaderProps) => {
               animation: `leaf-fall ${leaf.duration}s linear infinite`,
               animationDelay: `${leaf.delay}s`,
               fontSize: `${leaf.size}px`,
-              opacity: 0.4 + Math.random() * 0.4,
+              opacity: leaf.opacity,
             }}
           >
             <Leaf className="drop-shadow-lg" style={{ filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.1))" }} />
