@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import Loader from "@/components/Loader";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 import BenefitsSection from "@/components/BenefitsSection";
+import BuybackBurnSection from "@/components/BuybackBurnSection";
+import HEDGERSection from "@/components/HEDGERSection";
 import RoadmapSection from "@/components/RoadmapSection";
 import TokenomicsSection from "@/components/TokenomicsSection";
 import Footer from "@/components/Footer";
+import TwitterStickyButton from "@/components/TwitterStickyButton";
+import CursorEffect from "@/components/CursorEffect";
 
 const Index = () => {
   const [showLoader, setShowLoader] = useState(true);
@@ -26,11 +29,14 @@ const Index = () => {
     <div className="min-h-screen relative">
       <Navigation />
       <HeroSection />
-      <div id="about">
-        <AboutSection />
-      </div>
       <div id="benefits">
         <BenefitsSection />
+      </div>
+      <div id="buyback">
+        <BuybackBurnSection />
+      </div>
+      <div id="hedger">
+        <HEDGERSection />
       </div>
       <div id="roadmap">
         <RoadmapSection />
@@ -39,6 +45,8 @@ const Index = () => {
         <TokenomicsSection />
       </div>
       <Footer />
+      <TwitterStickyButton />
+      <CursorEffect />
     </div>
   );
 };

@@ -1,10 +1,24 @@
-import { ArrowRight, Sparkles, Leaf } from "lucide-react";
+import { ArrowRight, Leaf, Copy, Check } from "lucide-react";
 import heroImage from "@/assets/hero-hedge-executives.jpg";
 import { useEffect, useState, useMemo } from "react";
 import { ParticleButton } from "@/components/ParticleButton";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [copied, setCopied] = useState(false);
+  
+  const contractAddress = "CoCCScRnAcuUy4qVD298jYfdWG65iv5e6V1mY59Qpump";
+  const pumpFunLink = "https://pump.fun/coin/CoCCScRnAcuUy4qVD298jYfdWG65iv5e6V1mY59Qpump";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(contractAddress);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -83,14 +97,6 @@ const HeroSection = () => {
       {/* Main content */}
       <div className="container mx-auto px-4 py-20 lg:py-32 relative z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Badge with glow */}
-          <div className="flex justify-center mb-8 animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-hedge-bright/10 backdrop-blur-sm border border-hedge-bright/20 rounded-full px-6 py-3 shadow-lg animate-glow hover:scale-105 transition-transform duration-300 cursor-pointer">
-              <Sparkles className="w-5 h-5 text-hedge-bright animate-pulse" />
-              <span className="text-sm font-semibold text-hedge-dark tracking-wide">Decentralized Shrubbery Technology</span>
-            </div>
-          </div>
-          
           {/* Main headline - with perspective effect */}
           <div className="text-center mb-12 animate-fade-in space-y-6" style={{ animationDelay: "0.2s" }}>
             <h1 
@@ -136,24 +142,67 @@ const HeroSection = () => {
           
           {/* CTA buttons with enhanced hover */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <ParticleButton 
-              size="lg" 
-              className="text-xl px-8 py-7 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
+            <a
+              href={pumpFunLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
             >
-              <span className="relative z-10 flex items-center">
-                Buy on Pump.fun
-                <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-hedge-bright to-hedge-medium opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-            </ParticleButton>
-            <ParticleButton 
-              size="lg" 
-              variant="outline" 
-              className="text-xl px-8 py-7 border-2 border-primary/30 hover:bg-primary/5 hover:border-primary/60 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
+              <ParticleButton 
+                size="lg" 
+                className="text-xl px-8 py-7 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
+              >
+                <span className="relative z-10 flex items-center">
+                  Buy on Pump.fun
+                  <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-hedge-bright to-hedge-medium opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
+              </ParticleButton>
+            </a>
+            <a
+              href="https://x.com/hedgefundpump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
             >
-              <span className="relative z-10">Join the Hedge Fund</span>
-              <span className="absolute inset-0 bg-hedge-bright/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </ParticleButton>
+              <ParticleButton 
+                size="lg" 
+                variant="outline" 
+                className="text-xl px-8 py-7 border-2 border-primary/30 hover:bg-primary/5 hover:border-primary/60 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
+              >
+                <span className="relative z-10">Join the Hedge Fund</span>
+                <span className="absolute inset-0 bg-hedge-bright/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </ParticleButton>
+            </a>
+          </div>
+
+          {/* Contract Address */}
+          <div className="flex flex-col items-center gap-4 mt-12 animate-fade-in" style={{ animationDelay: "0.9s" }}>
+            <p className="text-sm text-muted-foreground font-medium">Contract Address</p>
+            <div className="flex items-center gap-3 px-6 py-4 bg-card/50 backdrop-blur-sm border border-border rounded-full hover:border-hedge-bright/50 transition-all duration-300 max-w-2xl w-full group">
+              <a
+                href={pumpFunLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 text-sm font-mono text-foreground hover:text-hedge-bright truncate text-center transition-colors"
+              >
+                {contractAddress}
+              </a>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopy();
+                }}
+                className="flex-shrink-0 w-10 h-10 rounded-lg bg-background hover:bg-hedge-bright/10 flex items-center justify-center transition-all duration-300 hover:scale-110 group-hover:border border-border"
+                aria-label="Copy contract address"
+              >
+                {copied ? (
+                  <Check className="w-5 h-5 text-hedge-bright" />
+                ) : (
+                  <Copy className="w-5 h-5 text-muted-foreground group-hover:text-hedge-bright transition-colors" />
+                )}
+              </button>
+            </div>
           </div>
 
           {/* Stats row with stagger animation */}

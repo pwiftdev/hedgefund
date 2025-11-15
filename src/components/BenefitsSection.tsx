@@ -1,100 +1,110 @@
-import { Sprout, Lock, Zap, Globe, Users, LineChart } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Shield, Leaf, Heart } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const benefits = [
+const statements = [
   {
-    icon: Sprout,
-    title: "Unmatched Greenery",
-    description: "Our proprietary hedge technology ensures year-round verdancy. No brown patches, ever.",
+    icon: Shield,
+    statement: "We are the hedge against the market",
+    description: "When volatility strikes, we stand firm. Your protection in uncertain times.",
+    gradient: "from-hedge-bright/20 to-hedge-medium/10",
   },
   {
-    icon: Lock,
-    title: "Market Protection (Kind Of)",
-    description: "While we can't guarantee financial returns, our hedges do provide excellent windbreaks.",
+    icon: Leaf,
+    statement: "We are green",
+    description: "Sustainable growth, always. Built for the long term, never fading.",
+    gradient: "from-hedge-medium/20 to-hedge-bright/10",
   },
   {
-    icon: Zap,
-    title: "Lightning-Fast Photosynthesis",
-    description: "Our blockchain-powered hedges convert sunlight to value at unprecedented rates.",
-  },
-  {
-    icon: Globe,
-    title: "Global Hedging Network",
-    description: "Join thousands of hedge enthusiasts worldwide. Together, we're reshaping the landscape.",
-  },
-  {
-    icon: Users,
-    title: "Community-Driven Pruning",
-    description: "Every holder gets a say in how we trim our strategic roadmap. Democracy, but greener.",
-  },
-  {
-    icon: LineChart,
-    title: "Sustainable Growth Model",
-    description: "Built on the proven principles of topiary excellence and sound agricultural practices.",
+    icon: Heart,
+    statement: "We are nourishing",
+    description: "Growing together, supporting our community, building something real.",
+    gradient: "from-hedge-bright/20 to-hedge-medium/10",
   },
 ];
 
 const BenefitsSection = () => {
   const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation();
-  const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-muted/20 relative overflow-hidden">
-      {/* Parallax decorative elements */}
+    <section className="py-24 bg-background relative overflow-hidden">
+      {/* Background effects */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-40 h-40 bg-hedge-bright rounded-full blur-3xl" />
-        <div className="absolute bottom-40 right-1/4 w-56 h-56 bg-hedge-medium rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-hedge-bright rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-hedge-medium rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 relative">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
+          {/* Title */}
           <div 
             ref={titleRef}
-            className={`text-center mb-16 transition-all duration-1000 ${
+            className={`text-center mb-20 transition-all duration-1000 ${
               titleVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Why Choose $HEDGE?
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-hedge-medium to-hedge-bright mx-auto mb-6" />
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto font-light">
-              The most sophisticated decentralized shrubbery technology in the market. Probably.
-            </p>
+            <div className="w-24 h-1 bg-gradient-to-r from-hedge-medium to-hedge-bright mx-auto" />
           </div>
 
-          <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
+          {/* Statement blocks */}
+          <div className="space-y-8">
+            {statements.map((item, index) => {
+              const Icon = item.icon;
+              
               return (
-                <Card 
+                <StatementBlock
                   key={index}
-                  className={`border-border bg-card hover:shadow-xl hover:shadow-hedge-bright/10 transition-all duration-500 hover:-translate-y-2 hover:scale-105 group ${
-                    cardsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                  }`}
-                  style={{ 
-                    transitionDelay: `${index * 100}ms`,
-                  }}
-                >
-                  <CardContent className="p-6">
-                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-hedge-bright to-hedge-medium flex items-center justify-center mb-4 shadow-lg group-hover:shadow-hedge-bright/50 group-hover:scale-110 transition-all duration-300">
-                      <Icon className="w-7 h-7 text-primary-foreground group-hover:rotate-12 transition-transform duration-300" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
-                      {benefit.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {benefit.description}
-                    </p>
-                  </CardContent>
-                </Card>
+                  item={item}
+                  index={index}
+                  Icon={Icon}
+                />
               );
             })}
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const StatementBlock = ({ item, index, Icon }: { item: typeof statements[0], index: number, Icon: typeof Shield }) => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.3 });
+  
+  return (
+    <div
+      ref={ref}
+      className={`relative transition-all duration-1000 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+                  {/* Background gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${item.gradient} rounded-2xl blur-2xl opacity-50`} />
+                  
+                  {/* Content */}
+                  <div className="relative bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 md:p-12 hover:border-hedge-bright/50 transition-all duration-500 group">
+                    <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-8">
+                      {/* Icon */}
+                      <div className="flex-shrink-0">
+                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-gradient-to-br from-hedge-bright to-hedge-medium flex items-center justify-center shadow-lg group-hover:shadow-hedge-bright/50 group-hover:scale-110 transition-all duration-300">
+                          <Icon className="w-8 h-8 md:w-10 md:h-10 text-primary-foreground" />
+                        </div>
+                      </div>
+                      
+                      {/* Text */}
+                      <div className="flex-1">
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 group-hover:bg-gradient-to-r group-hover:from-hedge-bright group-hover:to-hedge-medium group-hover:bg-clip-text group-hover:text-transparent transition-all duration-500">
+                          {item.statement}
+                        </h3>
+                        <p className="text-lg md:text-xl text-muted-foreground font-light">
+                          {item.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+    </div>
   );
 };
 

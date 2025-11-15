@@ -22,13 +22,23 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-lg shadow-lg border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/70 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]"
+          : "bg-transparent backdrop-blur-none"
       }`}
     >
-      <div className="container mx-auto px-4">
+      {/* Glass effect overlay */}
+      {isScrolled && (
+        <div className="absolute inset-0 bg-gradient-to-b from-white/5 via-white/0 to-transparent pointer-events-none" />
+      )}
+      
+      {/* Subtle border glow */}
+      {isScrolled && (
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-hedge-bright/30 to-transparent" />
+      )}
+      
+      <div className="container mx-auto px-4 relative">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
@@ -52,23 +62,23 @@ const Navigation = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
             {[
-              { label: "About", id: "about" },
               { label: "Benefits", id: "benefits" },
+              { label: "The HEDGER", id: "hedger" },
               { label: "Roadmap", id: "roadmap" },
               { label: "Tokenomics", id: "tokenomics" },
             ].map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-foreground/80 hover:text-foreground font-medium transition-all duration-300 relative group"
+                className="text-foreground/80 hover:text-foreground font-medium transition-all duration-300 relative group px-3 py-2 rounded-lg hover:bg-white/5 backdrop-blur-sm"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-hedge-bright group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-hedge-bright to-hedge-medium group-hover:w-[calc(100%-1.5rem)] transition-all duration-300 rounded-full" />
               </button>
             ))}
             <button
               onClick={() => scrollToSection("cta")}
-              className="px-6 py-2.5 bg-gradient-to-r from-hedge-medium to-hedge-bright text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-hedge-bright/50 hover:scale-105 transition-all duration-300"
+              className="px-6 py-2.5 bg-gradient-to-r from-hedge-medium to-hedge-bright text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-hedge-bright/50 hover:scale-105 transition-all duration-300 backdrop-blur-sm border border-white/10"
             >
               Buy $HEDGE
             </button>
