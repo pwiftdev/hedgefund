@@ -35,13 +35,13 @@ const Navigation = () => {
             <div className="w-12 h-12 rounded-lg overflow-hidden shadow-lg group-hover:shadow-hedge-bright/50 transition-all duration-300 group-hover:scale-110">
               <img 
                 src={hedgeLogo} 
-                alt="$HEDGE Logo" 
+                alt="HEDGE Logo" 
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="flex flex-col">
               <span className="text-2xl font-bold bg-gradient-to-r from-hedge-dark via-hedge-medium to-hedge-bright bg-clip-text text-transparent">
-                $HEDGE
+                HEDGE
               </span>
               <span className="text-xs text-muted-foreground -mt-1">
                 Hedge Fund
