@@ -10,6 +10,11 @@ const Loader = ({ onComplete }: LoaderProps) => {
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showButton, setShowButton] = useState(false);
 
+  // Force light mode for loader
+  useEffect(() => {
+    document.documentElement.classList.remove('dark');
+  }, []);
+
   const phrases = ["THE HEDGE", "AGAINST", "THE MARKET", "$HEDGE"];
 
   useEffect(() => {

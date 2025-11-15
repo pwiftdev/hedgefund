@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loader from "@/components/Loader";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
@@ -10,6 +10,13 @@ import Footer from "@/components/Footer";
 
 const Index = () => {
   const [showLoader, setShowLoader] = useState(true);
+
+  // Force dark mode after loader completes
+  useEffect(() => {
+    if (!showLoader) {
+      document.documentElement.classList.add('dark');
+    }
+  }, [showLoader]);
 
   if (showLoader) {
     return <Loader onComplete={() => setShowLoader(false)} />;
