@@ -31,7 +31,7 @@ const HeroSection = () => {
   );
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="cta" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Animated gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-hedge-bright/5 to-hedge-medium/10 animate-gradient" />
       
