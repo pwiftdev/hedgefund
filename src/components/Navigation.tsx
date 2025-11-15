@@ -76,12 +76,14 @@ const Navigation = () => {
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-hedge-bright to-hedge-medium group-hover:w-[calc(100%-1.5rem)] transition-all duration-300 rounded-full" />
               </button>
             ))}
-            <button
-              onClick={() => scrollToSection("cta")}
-              className="px-6 py-2.5 bg-gradient-to-r from-hedge-medium to-hedge-bright text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-hedge-bright/50 hover:scale-105 transition-all duration-300 backdrop-blur-sm border border-white/10"
+            <a
+              href="https://pump.fun/coin/CoCCScRnAcuUy4qVD298jYfdWG65iv5e6V1mY59Qpump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2.5 bg-gradient-to-r from-hedge-medium to-hedge-bright text-primary-foreground rounded-full font-semibold hover:shadow-lg hover:shadow-hedge-bright/50 hover:scale-105 transition-all duration-300 backdrop-blur-sm border border-white/10 inline-block"
             >
               Buy $HEDGE
-            </button>
+            </a>
           </div>
 
           {/* Mobile menu button */}
