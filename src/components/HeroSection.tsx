@@ -160,7 +160,7 @@ const HeroSection = () => {
               </ParticleButton>
             </a>
             <a
-              href="https://x.com/hedgefundpump"
+              href="https://x.com/i/communities/1989800370294423703"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"

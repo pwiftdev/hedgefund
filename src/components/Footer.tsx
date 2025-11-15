@@ -48,7 +48,7 @@ const Footer = () => {
           <div className="border-t border-primary-foreground/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
               <p className="text-primary-foreground/60">
-                © 2024 $HEDGE. All rights reserved to the hedges.
+                © 2025 $HEDGE. All rights reserved to the hedges.
               </p>
               <p className="text-primary-foreground/60 text-center md:text-right italic">
                 Disclaimer: Not financial advice. We're literally bushes.
