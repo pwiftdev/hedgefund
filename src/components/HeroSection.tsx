@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Leaf } from "lucide-react";
 import heroImage from "@/assets/hero-hedge-executives.jpg";
 import { useEffect, useState, useMemo } from "react";
+import { ParticleButton } from "@/components/ParticleButton";
 
 const HeroSection = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -136,7 +136,7 @@ const HeroSection = () => {
           
           {/* CTA buttons with enhanced hover */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <Button 
+            <ParticleButton 
               size="lg" 
               className="text-xl px-8 py-7 bg-primary hover:bg-primary/90 shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
             >
@@ -145,15 +145,15 @@ const HeroSection = () => {
                 <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </span>
               <span className="absolute inset-0 bg-gradient-to-r from-hedge-bright to-hedge-medium opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-            </Button>
-            <Button 
+            </ParticleButton>
+            <ParticleButton 
               size="lg" 
               variant="outline" 
               className="text-xl px-8 py-7 border-2 border-primary/30 hover:bg-primary/5 hover:border-primary/60 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:-translate-y-1 relative overflow-hidden group"
             >
               <span className="relative z-10">Join the Hedge Fund</span>
               <span className="absolute inset-0 bg-hedge-bright/5 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-            </Button>
+            </ParticleButton>
           </div>
 
           {/* Stats row with stagger animation */}
